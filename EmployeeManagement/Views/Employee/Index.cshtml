@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EmployeeManagement.Models.Employee>
+
+<h2>Employee List</h2>
+<a href="@Url.Action("Create", "Employee")" class="btn btn-primary">Add New Employee</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.FirstName</td>
+                <td>@employee.LastName</td>
+                <td>@employee.Position</td>
+                <td>@employee.Salary</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Employee", new { id = employee.Id })" class="btn btn-primary">Edit</a> |
+                 
+                    <form asp-action="DeleteConfirmed" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@employee.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+             
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
